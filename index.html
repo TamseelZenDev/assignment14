@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashe - Modern Wardrobe Essentials</title>
+    <!-- FontAwesome for clean minimalist iconography -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Reset & Fonts */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            color: #333333;
+            background-color: #ffffff;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        .container {
+            max-width: 1230px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 1. Header Navigation Styling */
+        header {
+            background-color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 85px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #222222;
+        }
+
+        .logo span {
+            color: #e65540;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-item {
+            font-size: 14px;
+            font-weight: 500;
+            color: #555555;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: #e65540;
+        }
+
+        .nav-item i {
+            font-size: 10px;
+            color: #888888;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            font-size: 18px;
+            color: #333333;
+        }
+
+        .nav-icons a:hover {
+            color: #e65540;
+        }
+
+        .divider {
+            color: #e6e6e6;
+            user-select: none;
+        }
+
+        .cart-wrapper {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: #222222;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 600;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 2. Hero Section Layout with Marquee Utility Notice */
+        .hero-banner {
+            position: relative;
+            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 520px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-text-box {
+            color: #ffffff;
+            max-width: 600px;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .hero-title {
+            font-size: 52px;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            text-transform: capitalize;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background-color: #ffffff;
+            color: #222222;
+            padding: 12px 34px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: 25px;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .hero-btn:hover {
+            background-color: #e65540;
+            color: #ffffff;
+        }
+
+        /* Marquee Alert Banner */
+        .ticker-bar {
+            background-color: #111111;
+            color: #ffffff;
+            padding: 12px 0;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        /* 3. Shop by Category Block Grid */
+        .categories-section {
+            padding: 70px 0 50px 0;
+        }
+
+        .section-heading {
+            font-size: 28px;
+            font-weight: 700;
+            color: #111111;
+            margin-bottom: 35px;
+            text-align: left;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .category-card {
+            position: relative;
+            height: 380px;
+            overflow: hidden;
+            border: 1px solid #eeeeee;
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.04);
+        }
+
+        .category-label {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: #ffffff;
+            color: #222222;
+            padding: 8px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* 4. New Arrivals & Product Cards Display Layout */
+        .arrivals-section {
+            padding: 50px 0;
+        }
+
+        .arrivals-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .view-all-btn {
+            border: 1px solid #cccccc;
+            padding: 8px 20px;
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .view-all-btn:hover {
+            background-color: #222222;
+            color: #ffffff;
+            border-color: #222222;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .product-card {
+            margin-bottom: 20px;
+        }
+
+        .product-image-container {
+            position: relative;
+            height: 340px;
+            background-color: #f7f7f7;
+            overflow: hidden;
+        }
+
+        .product-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .sale-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background-color: #e65540;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 2px 10px;
+        }
+
+        .quick-add-overlay {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            background-color: rgba(17, 17, 17, 0.9);
+            color: #ffffff;
+            text-align: center;
+            padding: 12px 0;
+            font-size: 13px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: bottom 0.3s;
+        }
+
+        .product-image-container:hover .quick-add-overlay {
+            bottom: 0;
+        }
+
+        .product-details {
+            padding-top: 12px;
+        }
+
+        .product-title {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 4px;
+        }
+
+        .product-price-box {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .price-current {
+            color: #222222;
+        }
+
+        .price-sale-old {
+            text-decoration: line-through;
+            color: #aaaaaa;
+            margin-left: 6px;
+        }
+
+        .price-sale-new {
+            color: #e65540;
+        }
+
+        .color-dots {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            display: inline-block;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* 5. Made To Last Spotlight Brand Banner */
+        .story-spotlight {
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            margin: 60px 0;
+        }
+
+        .story-img-pane {
+            flex: 1;
+            height: 440px;
+        }
+
+        .story-img-pane img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .story-text-pane {
+            flex: 1;
+            padding: 60px;
+        }
+
+        .story-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #111111;
+        }
+
+        .story-desc {
+            color: #666666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        .story-btn {
+            display: inline-block;
+            border: 1px solid #111111;
+            color: #111111;
+            padding: 10px 28px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .story-btn:hover {
+            background-color: #111111;
+            color: #ffffff;
+        }
+
+        /* 6. Why Shop With Us Features Grid Section */
+        .benefits-section {
+            padding: 50px 0 80px 0;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .benefit-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #222222;
+            margin-bottom: 10px;
+        }
+
+        .benefit-desc {
+            color: #777777;
+            font-size: 14px;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        /* 7. Journal & Blogs Layout Feed */
+        .journal-section {
+            padding: 60px 0;
+        }
+
+        .journal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .blog-card {
+            background: #ffffff;
+        }
+
+        .blog-img-box {
+            height: 250px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .blog-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .blog-card:hover .blog-img-box img {
+            transform: scale(1.03);
+        }
+
+        .blog-meta {
+            font-size: 12px;
+            color: #999999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .blog-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #222222;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .blog-title:hover {
+            color: #e65540;
+        }
+
+        .blog-excerpt {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        /* 8. Minimalist Brand Footer Layout */
+        footer {
+            background-color: #ffffff;
+            padding: 80px 0 30px 0;
+            border-top: 1px solid #eeeeee;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 2fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-heading {
+            font-size: 13px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            color: #111111;
+        }
+
+        .footer-brand h3 {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            color: #666666;
+            max-width: 260px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            gap: 16px;
+            font-size: 16px;
+            color: #555555;
+        }
+
+        .footer-social-icons a:hover {
+            color: #e65540;
+        }
+
+        .footer-links-list li {
+            list-style: none;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .footer-links-list li a:hover {
+            color: #e65540;
+        }
+
+        .newsletter-desc {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 20px;
+        }
+
+        .input-inline-form {
+            display: flex;
+            border-bottom: 2px solid #e6e6e6;
+            padding-bottom: 6px;
+            max-width: 320px;
+        }
+
+        .input-inline-form input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 14px;
+            color: #222222;
+        }
+
+        .input-inline-form button {
+            background: transparent;
+            border: none;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            color: #222222;
+        }
+
+        .input-inline-form button:hover {
+            color: #e65540;
+        }
+
+        .footer-credits {
+            border-top: 1px solid #eeeeee;
+            padding-top: 25px;
+            text-align: center;
+            font-size: 13px;
+            color: #888888;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Responsive Breakpoints Handling */
+        @media (max-width: 992px) {
+            .product-grid, .category-grid, .journal-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .story-spotlight { flex-direction: column; }
+            .benefits-grid { grid-template-columns: 1fr; gap: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .product-grid, .category-grid, .journal-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Header Navigation Layout -->
+    <header>
+        <div class="container navbar">
+            <div class="logo">Fashe<span>.</span></div>
+            <nav class="nav-menu">
+                <span class="nav-item active">Home</span>
+                <span class="nav-item">Shop <i class="fa-solid fa-chevron-down"></i></span>
+                <span class="nav-item">Product</span>
+                <span class="nav-item">Blog <i class="fa-solid fa-chevron-down"></i></span>
+                <span class="nav-item">About</span>
+                <span class="nav-item">Contact</span>
+            </nav>
+            <div class="nav-icons">
+                <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <span class="divider">|</span>
+                <a href="#"><i class="fa-regular fa-user"></i></a>
+                <span class="divider">|</span>
+                <a href="#" class="cart-wrapper">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. Hero Component with Banner Background Asset -->
+    <section class="hero-banner">
+        <div class="container">
+            <div class="hero-text-box">
+                <h4 class="hero-subtitle">New Season</h4>
+                <h1 class="hero-title">New season essentials</h1>
+                <p style="margin-bottom: 25px; font-size: 15px;">Considered pieces, made to be worn every day.</p>
+                <a href="#" class="hero-btn">Shop Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Info Ticker Utility Strip -->
+    <div class="ticker-bar">
+        <marquee scrollamount="5" behavior="scroll" direction="left">
+            Free shipping over $100 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            30 day returns &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            Carbon neutral delivery &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            Natural fibres only
+        </marquee>
+    </div>
+
+    <!-- 3. Category Matrix Grid -->
+    <section class="container categories-section">
+        <h2 class="section-heading">Shop by category</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80" alt="Clothing Category Layout">
+                <div class="category-label">Clothing</div>
+            </div>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80" alt="Jewellery Category Layout">
+                <div class="category-label">Jewellery</div>
+            </div>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&q=80" alt="Bags Category Layout">
+                <div class="category-label">Bags</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. New Arrivals Feed Grid Product Cards -->
+    <section class="container arrivals-section">
+        <div class="arrivals-header">
+            <h2 class="section-heading" style="margin-bottom: 0;">New arrivals</h2>
+            <a href="#" class="view-all-btn">View All</a>
+        </div>
+        
+        <div class="product-grid">
+            <!-- Row 1 Cards -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=400&q=80" alt="Cotton Knit Poncho">
+                    <div class="quick-add-overlay">Quick Add</div>
+                </div>
+                <div class="product-details">
+                    <div class="product-title">Cotton Knit Poncho</div>
+                    <div class="product-price-box"><span class="price-current">$89.00</span></div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&q=80" alt="Leather Biker Jacket">
+                    <div class="quick-add-overlay">Quick Add</div>
+                </div>
+                <div class="product-details">
+                    <div class="product-title">Leather Biker Jacket</div>
+                    <div class="product-price-box"><span class="price-current">$249.00</span></div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&q=80" alt="Suede Bomber Jacket">
+                    <span class="sale-badge">Sale</span>
+                    <div class="quick-add-overlay">Quick Add</div>
+                </div>
+                <div class="product-details">
+                    <div class="product-title">Suede Bomber Jacket</div>
+                    <div class="product-price-box">
+                        <span class="price-sale-new">$189.00</span>
+                        <span class="price-sale-old">$220.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=400&q=80" alt="Graphic Cotton Tee">
+                    <div class="quick-add-overlay">Quick Add</div>
+                </div>
+                <div class="product-details">
+                    <div class="product-title">Graphic Cotton Tee</div>
+                    <div class="product-price-box"><span class="price-current">$39.00</span></div>
+                </div>
+            </div>
+
+            <!-- Row 2 Cards -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&q=80" alt="Tailored Three-Piece Suit">
+                    <div class="quick-add-overlay">Quick Add</div>
+                </div>
+                <div class="product-details">
+                    <div class="product-title">Tailored Three-Piece Suit</div>
+                    <div class="product-price-box"><span class="price-current">$429.00</span></div>
+                    <div class="color-dots">
+                        <span class="dot" style="background-color:#1d3557;"></span>
+                        <span class="dot" style="background-color:#4a4a4a;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=400&q=80" alt="Canvas Tote Bag">
+                    <div class="quick-add-overlay">Quick Add</div>
+                </div>
+                <div class="product-details">
+                    <div class="product-title">Canvas Tote Bag</div>
+                    <div class="product-price-box"><span class="price-current">$45.00</span></div>
+                    <div class="color-dots">
+                        <span class="dot" style="background-color:#d7c0ae;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&q=80" alt="Everyday Backpack">
+                    <div class="quick-add-overlay">Quick Add</div>
+                </div>
+                <div class="product-details">
+                    <div class="product-title">Everyday Backpack</div>
+                    <div class="product-price-box"><span class="price-current">$120.00</span></div>
+                    <div class="color-dots">
+                        <span class="dot" style="background-color:#1c2541;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&q=80" alt="Bifold Leather Wallet">
+                    <div class="quick-add-overlay">Quick Add</div>
+                </div>
+                <div class="product-details">
+                    <div class="product-title">Bifold Leather Wallet</div>
+                    <div class="product-price-box"><span class="price-current">$59.00</span></div>
+                    <div class="color-dots">
+                        <span class="dot" style="background-color:#6f4e37;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Made To Last Brand Banner Pane -->
+    <section class="container">
+        <div class="story-spotlight">
+            <div class="story-img-pane">
+                <img src="https://images.unsplash.com/photo-1540221652346-e5dd6b50f3e7?w=700&q=80" alt="Rail of natural fibre clothing items">
+            </div>
+            <div class="story-text-pane">
+                <h2 class="story-title">Made to last</h2>
+                <p class="story-desc">Natural fibres, considered construction and a fit that holds its shape. We would rather sell you one jacket you keep for ten years than three you replace every season.</p>
+                <a href="#" class="story-btn">Our story</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Features Matrix Grid -->
+    <section class="container benefits-section">
+        <div class="benefits-grid">
+            <div>
+                <h4 class="benefit-title">Free shipping</h4>
+                <p class="benefit-desc">On all orders over $100, worldwide.</p>
+            </div>
+            <div>
+                <h4 class="benefit-title">30 day returns</h4>
+                <p class="benefit-desc">Not right? Send it back, no questions.</p>
+            </div>
+            <div>
+                <h4 class="benefit-title">Made responsibly</h4>
+                <p class="benefit-desc">Traceable materials and fair factories.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Journal Article Log Display -->
+    <section class="container journal-section">
+        <div class="arrivals-header">
+            <h2 class="section-heading" style="margin-bottom: 0;">Journal</h2>
+            <a href="#" class="view-all-btn">All posts</a>
+        </div>
+        
+        <div class="journal-grid">
+            <div class="blog-card">
+                <div class="blog-img-box">
+                    <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&q=80" alt="White shirt hanging mockup close up">
+                </div>
+                <div class="blog-meta">12 August 2026 &middot; Style</div>
+                <h3 class="blog-title">The white shirt that goes with everything</h3>
+                <p class="blog-excerpt">One shirt, six ways. How a single well-cut white shirt quietly does most of the work in a considered wardrobe.</p>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-img-box">
+                    <img src="https://images.unsplash.com/photo-1479064555552-3ef4979f8908?w=500&q=80" alt="Capsule wardrobe closet organized layout">
+                </div>
+                <div class="blog-meta">28 July 2026 &middot; Guides</div>
+                <h3 class="blog-title">How to build a capsule wardrobe that lasts</h3>
+                <p class="blog-excerpt">Fewer, better pieces. A practical method for cutting a wardrobe down to the things you actually reach for.</p>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-img-box">
+                    <img src="https://images.unsplash.com/photo-1582738411706-bfc8e691d1c2?w=500&q=80" alt="Washing natural clothes textiles care close up">
+                </div>
+                <div class="blog-meta">9 July 2026 &middot; Care</div>
+                <h3 class="blog-title">Caring for natural fibres so they last a decade</h3>
+                <p class="blog-excerpt">Wool, linen and cotton all want different things. A short guide to washing, drying and storing them properly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Complete Multi column Footer Configuration -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>Fashe</h3>
+                <p>Modern wardrobe essentials, made to last. Fewer, better pieces in natural fibres.</p>
+                <div class="footer-social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="footer-heading">Shop</h4>
+                <ul class="footer-links-list">
+                    <li><a href="#">Clothing</a></li>
+                    <li><a href="#">Bags</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Jewellery</a></li>
+                    <li><a href="#">Shoes</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="footer-heading">Help</h4>
+                <ul class="footer-links-list">
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Size guide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="footer-heading">Newsletter</h4>
+                <p class="newsletter-desc">New arrivals and offers, straight to your inbox.</p>
+                <div class="input-inline-form">
+                    <input type="email" placeholder="Email address">
+                    <button type="button">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container footer-credits">
+            <span>&copy; 2026 Fashe. Built by Colorlib. Images from Unsplash.</span>
+            <span>A free HTML template &mdash; also available as a Shopify theme.</span>
+        </div>
+    </footer>
+
+</body>
+</html>
